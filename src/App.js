@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import SimpleForm from './SimpleForm';
-import logo from './logo.svg';
+import InformationSection from './InformationSection';
+import AddressSection from './AddressSection';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class App extends Component {
-submit = (values) => {
+  submit = (values) => {
     // Do something with the form values
     console.log(values);
   }
 
-  displayProgress = () => {
-    const totalFields = this.props.formDetails.registeredFields && Object.keys(this.props.formDetails.registeredFields).length;
-    const completedFields = this.props.formDetails.values && Object.keys(this.props.formDetails.values).length;
+  displayProgress = (fields) => {
+    const totalFields = fields.registeredFields && Object.keys(fields.registeredFields).length;
+    const completedFields = fields.values && Object.keys(fields.values).length;
 
-    return `Completed ${completedFields || 0} / ${totalFields} fields.`
+    return `Completed ${completedFields || 0} / ${totalFields} required fields.`;
   }
 
   render() {
     return (
-      <div className="App">
-        <SimpleForm onSubmit={this.submit}/>
-        <span>Form Progress: {this.props.formDetails && this.displayProgress()}</span>
+      <div className="container">
+        <Grid>
+          <Row>
+            <Col md={6}>
+              <h1>Information</h1>
+              <InformationSection onSubmit={this.submit} />
+            </Col>
+            <Col md={6}>
+              <span>Form Progress: {this.props.informationDetails && this.displayProgress(this.props.informationDetails)}</span>
+              <pre>{JSON.stringify(this.props.informationDetails, null, '\t')}</pre>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <h1>Address</h1>
+              <AddressSection onSubmit={this.submit} />
+            </Col>
+            <Col md={6}>
+              <span>Form Progress: {this.props.addressDetails && this.displayProgress(this.props.addressDetails)}</span>
+              <pre>{JSON.stringify(this.props.addressDetails, null, '\t')}</pre>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

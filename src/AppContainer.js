@@ -3,7 +3,8 @@ import App from './App';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    formDetails: state.form.simple
+    informationDetails: state.form.information,
+    addressDetails: state.form.address
   }
 }
 
