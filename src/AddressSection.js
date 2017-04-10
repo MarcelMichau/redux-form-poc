@@ -40,7 +40,7 @@ const renderAddresses = ({ fields, meta: { touched, error, submitFailed }, allAd
                                 currentAddress.addressTypeId === '2' && <Field name={`${address}.postalTypeId`} component={renderSelectField} type="text" placeholder="Select Postal Type" label="Postal Type" options={postalTypes} validate={postalRequired.bind(null, index)} />
                             }
                             {
-                                currentAddress.addressTypeId === '2' && <Field name={`${address}.postalNumber`} component={renderTextField} type="text" placeholderAndLabel="Postal Number" validate={postalRequired.bind(null, index)} />
+                                currentAddress.addressTypeId === '2' && <Field name={`${address}.postalNumber`} component={renderTextField} type="text" placeholderAndLabel="Postal Number" validate={[postalRequired.bind(null, index), numeric]} />
                             }
                             { 
                             currentAddress.postalTypeId === '2' && <Field name={`${address}.privateBagNumber`} component={renderTextField} type="text" placeholderAndLabel="Private Bag Number" validate={privateBagRequired.bind(null, index)} />
